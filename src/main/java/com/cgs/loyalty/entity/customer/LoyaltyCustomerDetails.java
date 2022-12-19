@@ -1,7 +1,12 @@
 package com.cgs.loyalty.entity.customer;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Data;
 
@@ -11,6 +16,7 @@ import lombok.Data;
 public class LoyaltyCustomerDetails {
 
 	@Id
+	@Column(name = "customer_id")
 	private String customerId;
 	private String name;
 	private String mobileNo;
@@ -19,4 +25,8 @@ public class LoyaltyCustomerDetails {
 	private String customerType;
 	private String rating;
 	private String channelOfRegistration;
+	
+	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@JoinTable(name = "account_id" )
+	private LayaltyCustomerAccount loAccount;
 }

@@ -21,4 +21,4 @@ spring:
     database-platform: org.hibernate.dialect.Oracle10gDialect
     open-in-view: true
     hibernate:
-       ddl-auto: create
+       ddl-auto: update
