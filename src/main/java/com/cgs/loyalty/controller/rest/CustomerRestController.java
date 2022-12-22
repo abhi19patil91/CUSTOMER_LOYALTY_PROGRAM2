@@ -59,5 +59,21 @@ public class CustomerRestController {
 		loyaltyCustomerService.deleteById(customerId);
 		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
+	
+	@PutMapping("account/points")
+	public String pointsValuater(@RequestBody CustomerDto customerDto) {
+		
+		CustomerDto customer=loyaltyCustomerService.valuatePoints(customerDto);
+		
+		return ("You earned "+ customer.getCustomerAccount().getDebitedPoints() +" points"); 
+	}
+	
+	@PutMapping("account/deposit")
+	public String depositAmount(@RequestBody CustomerDto customerDto) {
+		
+		CustomerDto customer=loyaltyCustomerService.deposit(customerDto);
+		
+		return ("You deposited "+ customer.getCustomerAccount().getCreditedBalance() +" rupees successfuly !!"); 
+	}
 
 }

@@ -1,6 +1,9 @@
 package com.cgs.loyalty.dto;
 
 import javax.persistence.Id;
+
+import com.cgs.loyalty.entity.customer.LayaltyCustomerAccount;
+
 import lombok.Data;
 
 @Data
@@ -15,5 +18,7 @@ public class CustomerDto {
 	private String customerType;
 	private String rating;
 	private String channelOfRegistration;
+	
+	private LayaltyCustomerAccount customerAccount;
 
 }

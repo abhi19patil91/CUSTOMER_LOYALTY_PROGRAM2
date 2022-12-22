@@ -5,7 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Data;
@@ -26,7 +26,7 @@ public class LoyaltyCustomerDetails {
 	private String rating;
 	private String channelOfRegistration;
 	
-	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	@JoinTable(name = "account_id" )
-	private LayaltyCustomerAccount loAccount;
+	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "fk_customerId", nullable = false)
+	private LayaltyCustomerAccount customerAccount;
 }
