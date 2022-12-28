@@ -1,16 +1,12 @@
-package com.cgs.loyalty.service.customer;
+package com.cgs.loyalty.service;
 
 import java.util.List;
 import com.cgs.loyalty.dto.CustomerDto;
-import com.cgs.loyalty.entity.customer.LoyaltyCustomerDetails;
 
 public interface LoyaltyCustomerService {
 
 	// Create Customer
 	public CustomerDto save(CustomerDto customerDto);
-	
-	// Create Customer
-	public LoyaltyCustomerDetails save(LoyaltyCustomerDetails customer);
 
 	// Get Customers
 	public List<CustomerDto> getAllCustomer();
@@ -23,13 +19,5 @@ public interface LoyaltyCustomerService {
 
 	// Delete Customer
 	public void deleteById(String customerId);
-
-	//Evaluate points
-	public CustomerDto valuatePoints(CustomerDto customerDto);
-
-	//Deposit ammount
-	public CustomerDto deposit(CustomerDto customerDto);
-
 	
-
 }

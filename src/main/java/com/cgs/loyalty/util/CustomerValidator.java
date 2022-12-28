@@ -1,12 +1,10 @@
 package com.cgs.loyalty.util;
 
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import com.cgs.loyalty.advice.ErrorDetails;
 import com.cgs.loyalty.dto.CustomerDto;
 import com.cgs.loyalty.entity.customer.LoyaltyCustomerDetails;
@@ -28,7 +26,7 @@ public class CustomerValidator {
 
 		if (customer.isEmpty()) {
 
-			String regaxId = "^[\\d]{4}$";
+			String regaxId = "^[\\d]{8}$";
 			String regaxEmail = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
 			String regaxDob = "^([0-2][0-9]|(3)[0-1])(\\/)(((0)[0-9])|((1)[0-2]))(\\/)\\d{4}$";
 			String regaxRating = "^[1-5]$";

@@ -1,17 +1,16 @@
-package com.cgs.loyalty.service.customer;
+package com.cgs.loyalty.serviceImpl;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.cgs.loyalty.advice.ErrorDetails;
 import com.cgs.loyalty.dto.CustomerDto;
-import com.cgs.loyalty.entity.customer.LayaltyCustomerAccount;
 import com.cgs.loyalty.entity.customer.LoyaltyCustomerDetails;
 import com.cgs.loyalty.exception.BadRequestException;
 import com.cgs.loyalty.repository.LoyaltyCustomerRepository;
+import com.cgs.loyalty.service.LoyaltyCustomerService;
 import com.cgs.loyalty.util.CustomerValidator;
 
 @Service
@@ -86,75 +85,18 @@ public class LoyaltyCustomerServiceImp implements LoyaltyCustomerService {
 
 	}
 
-	// Dto to LoyaltyCustomerDetails
+	// DTO to LoyaltyCustomerDetails
 	public LoyaltyCustomerDetails dtoToLoyCustomerDetails(CustomerDto customerDto) {
 
 		LoyaltyCustomerDetails customerDetails = this.modelMapper.map(customerDto, LoyaltyCustomerDetails.class);
 		return customerDetails;
 	}
 
-	// LoyaltyCustomerDetails to Dto
+	// LoyaltyCustomerDetails to DTO
 	public CustomerDto loyCustomerDetailsToDto(LoyaltyCustomerDetails loyCustomerDetails) {
 
 		CustomerDto customerDto = this.modelMapper.map(loyCustomerDetails, CustomerDto.class);
 		return customerDto;
-	}
-
-	@Override
-	public LoyaltyCustomerDetails save(LoyaltyCustomerDetails customer) {
-
-		return customerLoyaltyRepository.save(customer);
-	}
-
-	@Override
-	public CustomerDto valuatePoints(CustomerDto customerDto) {
-
-		LoyaltyCustomerDetails account = customerLoyaltyRepository.findById(customerDto.getCustomerId()).orElse(null);
-
-		long balance = account.getCustomerAccount().getAccoutBalance()
-				- customerDto.getCustomerAccount().getDebitedBalance();
-
-		long points = (long) (customerDto.getCustomerAccount().getDebitedBalance() * (0.1));
-		long totalPoints = (long) (customerDto.getCustomerAccount().getDebitedBalance() * (0.1)
-				+ account.getCustomerAccount().getInitialPoints());
-
-		LayaltyCustomerAccount account1 = new LayaltyCustomerAccount();
-		account1.setAccoutBalance(balance);
-		account1.setDebitedPoints(points);
-		account1.setInitialPoints(totalPoints);
-		account1.setDebitedBalance(customerDto.getCustomerAccount().getDebitedBalance());
-		account1.setId(customerDto.getCustomerAccount().getId());
-
-		LoyaltyCustomerDetails accountt = new LoyaltyCustomerDetails();
-		accountt.setCustomerId(customerDto.getCustomerId());
-		accountt.setCustomerAccount(account1);
-
-		customerLoyaltyRepository.save(accountt);
-
-		return loyCustomerDetailsToDto(accountt);
-	}
-
-	@Override
-	public CustomerDto deposit(CustomerDto customerDto) {
-
-		LoyaltyCustomerDetails account = customerLoyaltyRepository.findById(customerDto.getCustomerId()).orElse(null);
-
-		long creditAmmount = (customerDto.getCustomerAccount().getCreditedBalance());
-		long totalAmmount = (customerDto.getCustomerAccount().getCreditedBalance()
-				+ account.getCustomerAccount().getCreditedBalance());
-
-		LayaltyCustomerAccount account1 = new LayaltyCustomerAccount();
-		account1.setAccoutBalance(totalAmmount);
-		account1.setCreditedBalance(creditAmmount);
-		account1.setId(customerDto.getCustomerAccount().getId());
-
-		LoyaltyCustomerDetails accountt = new LoyaltyCustomerDetails();
-		accountt.setCustomerId(customerDto.getCustomerId());
-		accountt.setCustomerAccount(account1);
-
-		customerLoyaltyRepository.save(accountt);
-
-		return loyCustomerDetailsToDto(accountt);
 	}
 
 }

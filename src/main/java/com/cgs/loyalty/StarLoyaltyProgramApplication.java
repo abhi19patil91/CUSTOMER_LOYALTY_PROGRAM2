@@ -15,7 +15,7 @@ public class StarLoyaltyProgramApplication {
 
 	@Bean
 	public ModelMapper modelMapper() {
-
+		
 		return new ModelMapper();
 	}
 

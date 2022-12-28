@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.cgs.loyalty.dto.CustomerDto;
-import com.cgs.loyalty.service.customer.LoyaltyCustomerService;
+import com.cgs.loyalty.service.LoyaltyCustomerService;
 
 @RestController
 public class CustomerRestController {
@@ -60,20 +60,4 @@ public class CustomerRestController {
 		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
 	
-	@PutMapping("account/points")
-	public String pointsValuater(@RequestBody CustomerDto customerDto) {
-		
-		CustomerDto customer=loyaltyCustomerService.valuatePoints(customerDto);
-		
-		return ("You earned "+ customer.getCustomerAccount().getDebitedPoints() +" points"); 
-	}
-	
-	@PutMapping("account/deposit")
-	public String depositAmount(@RequestBody CustomerDto customerDto) {
-		
-		CustomerDto customer=loyaltyCustomerService.deposit(customerDto);
-		
-		return ("You deposited "+ customer.getCustomerAccount().getCreditedBalance() +" rupees successfuly !!"); 
-	}
-
 }
