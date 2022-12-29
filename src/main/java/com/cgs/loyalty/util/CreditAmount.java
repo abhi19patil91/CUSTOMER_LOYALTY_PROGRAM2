@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class CreditAmount {
 	
-	private long id;
+	private long accountId;
 	private long creditAmount;
 
 }

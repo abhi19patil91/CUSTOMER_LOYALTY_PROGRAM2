@@ -26,7 +26,7 @@ public class LoyaltyAccountServiceImpl implements LoyaltyAccountService {
 	}
 	
 	
-	
+
 	
 	
 	

@@ -7,10 +7,4 @@ import com.cgs.loyalty.entity.customer.LoyaltyCustomerDetails;
 @Repository
 public interface LoyaltyCustomerRepository extends JpaRepository<LoyaltyCustomerDetails, String> {
 
-	
-
-	
-
-	
-
 }
